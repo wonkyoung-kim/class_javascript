@@ -22,6 +22,7 @@ a {
 #slider .panel {
     width: calc(100% * 5);
     height: 100%;
+    transition: 1s;
 }
 /* li == 100% / panel개수 */
 #slider .panel li {
