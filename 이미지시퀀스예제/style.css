@@ -1,0 +1,28 @@
+@charset 'utf-8';
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #222;
+}
+
+article {
+    width: 100%;
+    height: 50vh;
+    background-color: aqua;
+    position: relative;
+}
+img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    display: none;
+}
