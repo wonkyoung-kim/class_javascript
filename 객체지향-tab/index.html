@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체지향 TabMenu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script defer src="main.js"></script>
+    <script>
+        $(document).ready(function(){
+            new Tab('#tab');
+        })
+    </script>
+</head>
+<body>
+    <!--
+        //객체지향 코드 변환 순서
+        1. 생성자함수 정의
+        2. 생성자 함수 안쪽에서 전역변수를 this객체에 옮겨닮기
+        3. this객체에 옮겨담은 요소에 이벤트문 연결
+        4. 이벤트문 연결시 함수 외부에서 bind(this)로 안쪽 this값 고정
+        5. 생성자의 프로토타입에 함수 등록
+        6. new연산자로 생성자로 부터 인스턴스 복사해서 기능 활성화
+    -->
+    <!--
+        효율적인 객체지향 코드 변환순서
+        1. 생성자함수 정의
+        2. init(), bindingEvent()메서드 호출
+        3. 위의 2개의 메서드를 프로토타입에 등록
+        4. 나머지 필요한 기능들을 상황에 맞게 프로토타입에 등록
+        5. index.html파일에서 인스턴스 복사 구문 설정
+    -->
+    <div id="tab">
+        <ul>
+            <li class="on"><a href="#box1">button1</a></li>
+            <li><a href="#box2">button2</a></li>
+            <li><a href="#box3">button3</a></li>
+        </ul>
+
+        <div id="box1" class="on">BOX1</div>
+        <div id="box2">BOX2</div>
+        <div id="box3">BOX3</div>
+    </div>
+</body>
+</html>
+
+
+<!-- 
+    es6에서의 객체지향 순서
+    1. class로 코드 블록 생성
+    2. 그 안쪽에 constructor(생성자)를 만들고
+    3. this.init(), this.bindingEvent() 호출
+    4. init()메서드 안쪽에 this인스턴스에 상수값 전달
+    5. bindingEvent()메서드 안쪽에 이벤트문 연결
+    6. bindingEvent에서 화살표함수 작성시 .bind(this) 불필요
+    7. 나머지 메서드 등록 후 new 키워드로 인스턴스 복사해 기능 활성화
+ -->
