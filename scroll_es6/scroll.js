@@ -8,13 +8,21 @@
 var boxs = $('section');
 var btns = $('#navi li');
 var speed = 1000;
+var enableClick = true;
 var posArr;
 
 //브라우저 로딩시
 setPos();
 
 //브라우저 리사이즈시
-$(window).on('resize', setPos);
+$(window).on('resize', function(){
+    //세로 섹션의 위치값을 갱신
+    setPos();
+
+    //현재 스크롤 위치값을 버튼의 순번의 위치값에 맞게 보정
+    var i = btns.filter('.on').index();
+    moveScroll(i);
+});
 
 //브라우저 스크롤시
 $(window).on('scroll', function(e){
@@ -24,8 +32,27 @@ $(window).on('scroll', function(e){
 //세로버튼 클릭시
 btns.on('click', function(e){
     e.preventDefault();
-    moveScroll(e); 
+
+    var isOn = $(e.currentTarget).hasClass('on');
+    if(isOn) return;
+
+    if(enableClick){
+        var i = $(e.currentTarget).index();
+        moveScroll(i);
+        enableClick = false;
+    }
 });
+
+//마우스 휠 이벤트 시
+boxs.on('mousewheel',function(e){
+    e.preventDefault();
+
+    if(e.originalEvent.deltaY < 0){
+        console.log('wheel up');
+    } else {
+        console.log('wheel down');
+    }
+})
 
 //박스의 세로위치값을 배열로 저장해주는 함수 정의
 function setPos(){
@@ -49,9 +76,10 @@ function activation(event){
 }
 
 //이벤트 객체 정보값을 인수로 받아서 해당 섹션위치로 자동 스크롤 함수 정의
-function moveScroll(event){
-    var target = $(event.currentTarget).children('a').attr('href');
-    var targetPos = $(target).offset().top;
-    $('html, body').stop().animate({scrollTop: targetPos}, speed);
+function moveScroll(index){
+    var targetPos = boxs.eq(index).offset().top;
+    $('html, body').stop().animate({scrollTop: targetPos}, speed, function(){
+        enableClick = true;
+    });
 }
 
