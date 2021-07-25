@@ -47,10 +47,18 @@ btns.on('click', function(e){
 boxs.on('mousewheel',function(e){
     e.preventDefault();
 
+    var i = $(e.currentTarget).index();
+    
     if(e.originalEvent.deltaY < 0){
         console.log('wheel up');
+        //휠을 올릴때 만약 현재 순번 첫번째 패널이면 함수 중지
+        if(i==0) return;
+        moveScroll(i-1);
     } else {
         console.log('wheel down');
+        //휠을 내릴때 만약 현재 순번이 마지막 패널이면 함수 중지
+        if(i==boxs.length-1) return;
+        moveScroll(i+1);
     }
 })
 
