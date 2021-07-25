@@ -8,10 +8,13 @@
 var boxs = $('section');
 var btns = $('#navi li');
 var speed = 1000;
-var posArr = [];
+var posArr;
 
 //브라우저 로딩시
 setPos();
+
+//브라우저 리사이즈시
+$(window).on('resize', setPos);
 
 //브라우저 스크롤시
 $(window).on('scroll', function(e){
@@ -24,11 +27,13 @@ btns.on('click', function(e){
     moveScroll(e); 
 });
 
-//
+//박스의 세로위치값을 배열로 저장해주는 함수 정의
 function setPos(){
+    posArr = [];
     boxs.each(function(index, data){
         posArr.push( boxs.eq(index).offset().top );
     })
+    console.log(posArr);
 }
 
 //윈도우 이벤트 정보값을 인수로 받아서 스크롤위치에 따른 버튼 활성화 함수 정의
