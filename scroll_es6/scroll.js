@@ -6,29 +6,30 @@
     scrollTop은 animatie()메서드 안에서 키값으로 활용(해당 스크롤 위치로 이동)
 */
 
-var pos1 = $('#box1').offset().top;
-var pos2 = $('#box2').offset().top;
-var pos3 = $('#box3').offset().top;
-var pos4 = $('#box4').offset().top;
+var posArr = [];
+
+$('section').each(function(index, data){
+    posArr.push( $('section').eq(index).offset().top );
+})
+
+console.log(posArr);
 
 $(window).on('scroll', function(e){
     var scroll = $(e.currentTarget).scrollTop();
-    var posBox2 = $('#box2').offset().top;
-    $('h1').text(scroll);
 
-    if(scroll >= pos1){
+    if(scroll >= posArr[0]){
         $('#navi li').removeClass('on');
         $("#navi li").eq(0).addClass('on');
     }
-    if(scroll >= pos2){
+    if(scroll >= posArr[1]){
         $('#navi li').removeClass('on');
         $("#navi li").eq(1).addClass('on');
     }
-    if(scroll >= pos3){
+    if(scroll >= posArr[2]){
         $('#navi li').removeClass('on');
         $("#navi li").eq(2).addClass('on');
     }
-    if(scroll >= pos4){
+    if(scroll >= posArr[3]){
         $('#navi li').removeClass('on');
         $("#navi li").eq(3).addClass('on');
     }
